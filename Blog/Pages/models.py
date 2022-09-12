@@ -8,7 +8,7 @@ class Pages(models.Model):
     title=models.CharField(max_length=50)
     subtitle=models.CharField(max_length=150)
     body=models.CharField(max_length=12000)
-    author=models.ForeignKey(User,on_delete=models.CASCADE)
+    author=models.OneToOneField(User,on_delete=models.CASCADE)
     date=models.DateField(default=timezone.now)
     image=models.ImageField(upload_to='pages_img',default='default.png',blank=True)
 

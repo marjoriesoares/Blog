@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import UserRegisterForm, UserEditForm, AvatarForm
 from django.urls import reverse_lazy
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -41,14 +42,9 @@ def signup(request):
         signupform=UserCreationForm()
     return render(request, 'Accounts/signup.html', {'signupform':signupform})
 
-class Profiles(DetailView, User):
-    template_name = 'Accounts/profile.html'
-    queryset = User.objects.all()
-    
-    def get_object(self):
-        id = self.kwargs.get("id")
-        user = get_object_or_404(User, id=id)
-        return user
+@login_required
+def profile(request):
+    return render(request, 'accounts/profile.html')
 
 def editprofile(request):
     return render(request, 'Accounts/editprofile.html')
