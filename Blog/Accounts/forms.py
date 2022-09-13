@@ -6,14 +6,14 @@ from .models import *
 
 
 class UserRegisterForm(UserCreationForm):
-    email=forms.EmailField()
-    password = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password_confirmation = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
+    first_name=forms.CharField(label='First Name', max_length=100, required=True)
+    last_name=forms.CharField(label='Last Name', max_length=100, required=True)
+    username=forms.CharField(label='Username',max_length=100, required=True)
+    email=forms.EmailField(label='Email')
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password', 'password_confirmation']
-        help_texts = {k:"" for k in fields}
+        fields = ['first_name', 'last_name', 'username', 'email']
 
 class UserEditForm(UserCreationForm):
     email=forms.EmailField(label='Edit email')
@@ -36,3 +36,11 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['name', 'description', 'link', 'email', 'password', 'image']
+
+class UpdateProfileForm(forms.ModelForm):
+    image = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
+
+    class Meta:
+        model = Profile
+        fields = ['image', 'description']

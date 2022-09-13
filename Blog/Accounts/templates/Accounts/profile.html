@@ -7,6 +7,18 @@
     <title>Profile</title>
 </head>
 <body>
-    <h1>This is the profile page for {{ user.username }} {{{ user.email }}</h1>
+    <h1>This is the profile page for {{ user.username }} </h1>
+
+    {% for field in profile %}
+
+    <p>{{ field.name }}</p>
+    <p>{{ field.description }}</p>
+    <p>{{ field.email }}</p>
+    <p>{{ field.link }}</p>
+    <p>{{ field.image }}</p>
+    
+    {% endfor %}
+
+
 </body>
 </html>

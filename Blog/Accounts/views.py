@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import UserRegisterForm, UserEditForm, AvatarForm
+from .forms import UserRegisterForm, UserEditForm, AvatarForm, ProfileForm, UpdateProfileForm
 from django.urls import reverse_lazy
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
@@ -8,6 +8,9 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.views.generic import DetailView
+from django.views import View
+from .models import Profile
+
 
 
 def login_form(request):
@@ -19,7 +22,7 @@ def login_form(request):
             user=authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return render(request,'Pages/home.html', {'message':f"Welcome {user}!"})
+                return render(request,'Accounts/profile.html', {'message':f"Welcome {user}!"})
             else:
                 return render(request, 'Accounts/login.html', {"login_form":login_form,'message':'Username or password incorrect'})
         else:
@@ -32,19 +35,20 @@ def logout(request):
     return render(request, 'Accounts/logout.html')
 
 def signup(request):
-    if request.method=='POST':
-        signupform=UserCreationForm(request.POST)
-        if signupform.is_valid():
-            username=signupform.cleaned_data['username']
-            signupform.save()
-            return render(request, 'Pages/home.html', {'message':"User sucessfully created"})
+    if request.method=="POST":
+        form= UserRegisterForm(request.POST)
+        if form.is_valid():
+            username=form.cleaned_data["username"]
+            form.save()
+            return render(request, 'Accounts/home.html', {'mensaje':f"Usuario {username} creado"})
     else:
-        signupform=UserCreationForm()
-    return render(request, 'Accounts/signup.html', {'signupform':signupform})
+        form=UserRegisterForm()
+    return render(request, 'Accounts/signup.html', {'form':form})
 
 @login_required
 def profile(request):
-    return render(request, 'accounts/profile.html')
+    profile=Profile.objects.all()
+    return render(request, "Accounts/profile.html", {"profile":profile})
 
 def editprofile(request):
     return render(request, 'Accounts/editprofile.html')
