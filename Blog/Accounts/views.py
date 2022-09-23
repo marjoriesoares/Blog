@@ -38,13 +38,13 @@ def signup(request):
     if request.method=="POST":
         form= UserRegisterForm(request.POST)
         if form.is_valid():
-            username=UserRegisterForm.cleaned_data.get("username")
-            first_name=UserRegisterForm.cleaned_data.get("first_name")
-            last_name=UserRegisterForm.cleaned_data.get("last_name")
-            email=UserRegisterForm.cleaned_data.get("email")
-            user=Profile(username=username, first_name=first_name, last_name=last_name, email=email)
+            username=form.cleaned_data.get("username")
+            first_name=form.cleaned_data.get("first_name")
+            last_name=form.cleaned_data.get("last_name")
+            email=form.cleaned_data.get("email")
+            user=User(username=username, first_name=first_name, last_name=last_name, email=email)
             user.save()
-            return redirect('login')
+            return render(request, 'Accounts/login.html', {"login_form":login_form})
     else:
         form=UserRegisterForm()
     return render(request, 'Accounts/signup.html', {'form':form})
