@@ -1,3 +1,8 @@
+{% extends "Pages/maintemplate.html" %} {% load static %} 
+{% block header %}
+
+{% endblock%}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +16,9 @@
 
     {{ form.as_p }}
     
-        <button type="submit">sign up</button>
+        <button type="submit">Sign up</button>
     
     </form>
 </body>
+{% endblock%}
 </html>

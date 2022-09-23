@@ -9,7 +9,7 @@ class UserRegisterForm(UserCreationForm):
     first_name=forms.CharField(label='First Name', max_length=100, required=True)
     last_name=forms.CharField(label='Last Name', max_length=100, required=True)
     username=forms.CharField(label='Username',max_length=100, required=True)
-    email=forms.EmailField(label='Email')
+    email=forms.EmailField(label='Email',required=True)
 
     class Meta:
         model = User
@@ -35,7 +35,7 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ['name', 'description', 'link', 'email', 'password', 'image']
+        fields = ['name', 'description', 'link', 'image']
 
 class UpdateProfileForm(forms.ModelForm):
     image = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))

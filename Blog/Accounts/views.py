@@ -38,9 +38,13 @@ def signup(request):
     if request.method=="POST":
         form= UserRegisterForm(request.POST)
         if form.is_valid():
-            username=form.cleaned_data["username"]
-            form.save()
-            return render(request, 'Accounts/home.html', {'mensaje':f"Usuario {username} creado"})
+            username=UserRegisterForm.cleaned_data.get("username")
+            first_name=UserRegisterForm.cleaned_data.get("first_name")
+            last_name=UserRegisterForm.cleaned_data.get("last_name")
+            email=UserRegisterForm.cleaned_data.get("email")
+            user=Profile(username=username, first_name=first_name, last_name=last_name, email=email)
+            user.save()
+            return redirect('login')
     else:
         form=UserRegisterForm()
     return render(request, 'Accounts/signup.html', {'form':form})
