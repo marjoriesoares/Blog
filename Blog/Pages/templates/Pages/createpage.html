@@ -1,3 +1,11 @@
+{% extends "Pages/maintemplate.html" %} {% load static %} 
+{% block title %}
+<title>Create Post</title>
+{% endblock %}
+{% block header %}
+<div style="margin: 5em";></div>
+{% endblock%}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +21,7 @@
     {{ object }}
     
     </form>
-    
+    <div style="margin: 5em";></div>
 </body>
+{% endblock %}
 </html>

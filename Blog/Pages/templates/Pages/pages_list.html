@@ -1,3 +1,11 @@
+{% extends "Pages/maintemplate.html" %} {% load static %} 
+{% block title %}
+<title>Posts</title>
+{% endblock %}
+{% block header %}
+<div style="margin: 5em";></div>
+{% endblock%}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,5 +21,7 @@
             {{ page.title }}
             {{ page.date }}
         {% endfor %}
+        <div style="margin: 5em";></div>
 </body>
+{% endblock %}
 </html>
