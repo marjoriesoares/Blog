@@ -22,7 +22,7 @@ def login_form(request):
             user=authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return render(request,'Accounts/profile.html', {'message':f"Welcome {user}!"})
+                return redirect('profile')
             else:
                 return render(request, 'Accounts/login.html', {"login_form":login_form,'message':'Username or password incorrect'})
         else:
@@ -44,7 +44,7 @@ def signup(request):
             email=form.cleaned_data.get("email")
             user=User(username=username, first_name=first_name, last_name=last_name, email=email)
             user.save()
-            return render(request, 'Accounts/login.html', {"login_form":login_form})
+            return redirect('login')
     else:
         form=UserRegisterForm()
     return render(request, 'Accounts/signup.html', {'form':form})

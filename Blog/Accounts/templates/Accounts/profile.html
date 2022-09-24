@@ -15,16 +15,24 @@
     <title>Profile</title>
 </head>
 <body>
+
     <h1>This is the profile page for {{ user.username }} </h1>
+ 
+
+    <p>{{ user.username }}</p>
 
     {% for field in profile %}
 
-    <p>{{ field.name }}</p>
     <p>{{ field.description }}</p>
     <p>{{ field.link }}</p>
     <p>{{ field.image }}</p>
-    
+
     {% endfor %}
+    <p>{{ user.email }}</p>
+
+
+
+    <button type="submit"> <a href="{% url 'logout' %}">Sign out</a></button>
 
     <div style="margin: 5em";></div>
 </body>
