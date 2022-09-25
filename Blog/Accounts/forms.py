@@ -17,14 +17,16 @@ class UserRegisterForm(UserCreationForm):
 
 class UserEditForm(UserCreationForm):
     email=forms.EmailField(label='Edit email')
-    password = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password_confirmation = forms.CharField(label='Confirm password', widget=forms.PasswordInput)
     first_name=forms.CharField(label='Edit Name')
     last_name=forms.CharField(label='Edit Surname')
+    description=models.CharField(max_length=500)
+    link=models.CharField(max_length=200)
+    image=models.ImageField(default='default.png',upload_to='avatar')
+
 
     class Meta:
-        model = User
-        fields = [ 'email', 'password', 'password_confirmation', 'first_name', 'last_name']
+        model = Profile
+        fields = ['first_name', 'last_name','email', 'description','link','image']
         help_texts = {k:"" for k in fields}
 
 class AvatarForm(forms.Form):
@@ -36,11 +38,3 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['user', 'description', 'link', 'image']
-
-class UpdateProfileForm(forms.ModelForm):
-    image = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
-    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
-
-    class Meta:
-        model = Profile
-        fields = ['image', 'description']

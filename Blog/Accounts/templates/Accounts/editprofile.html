@@ -6,17 +6,16 @@
 <div style="margin: 5em";></div>
 {% endblock%}
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit profile</title>
-</head>
-<body>
-    This is edit profile
-    <div style="margin: 5em";></div>
-</body>
+
+<form action="{% url 'editprofile' id  %}" method="POST"> {% csrf_token %}
+
+    <table>
+    
+        {{ form.as_table }}
+    </table>
+    
+    <input type="submit", value="Save">
+    
+    </form>
+
 {% endblock%}
-</html>

@@ -31,6 +31,7 @@ def login_form(request):
         login_form=AuthenticationForm()
         return render(request, 'Accounts/login.html', {"login_form":login_form})
 
+@login_required
 def logout(request):
     return render(request, 'Accounts/logout.html')
 
@@ -54,5 +55,24 @@ def profile(request):
     profile=Profile.objects.all()
     return render(request, "Accounts/profile.html", {"profile":profile})
 
-def editprofile(request):
-    return render(request, 'Accounts/editprofile.html')
+@login_required
+def editprofile(request, id):
+    edit_profile=Profile.objects.get(id=id)
+    if request.method=='POST':
+        form=UserEditForm(request.POST)
+        if form.is_valid():
+            data=form.cleaned_data
+            edit_profile.first_name=data["first_name"]
+            edit_profile.last_name=data["last_name"]
+            edit_profile.email=data["email"]
+            edit_profile.description=data["description"]
+            edit_profile.link=data["link"]
+            edit_profile.image=data["image"]
+            edit_profile.save()
+            return render(request, 'Accounts/profile.html')
+    else:
+        form= Usereditform(initial={"first_name":edit_profile.first_name, 
+        "last_name":edit_profile.last_name, "email":edit_profile.email, 
+        "description":edit_profile.description,"link":edit_profile.link, 
+        "image":edit_profile.image})
+        return render(request, "Accounts/editprofile.html")
