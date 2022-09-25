@@ -29,9 +29,6 @@ class UserEditForm(UserCreationForm):
         fields = ['first_name', 'last_name','email', 'description','link','image']
         help_texts = {k:"" for k in fields}
 
-class AvatarForm(forms.Form):
-    image= forms.ImageField(label="Choose avatar")
-
 class ProfileForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
 

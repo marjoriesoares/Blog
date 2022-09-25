@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import UserRegisterForm, UserEditForm, AvatarForm, ProfileForm, UpdateProfileForm
+from .forms import UserRegisterForm, UserEditForm, ProfileForm
 from django.urls import reverse_lazy
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
