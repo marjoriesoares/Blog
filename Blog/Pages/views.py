@@ -19,15 +19,21 @@ class PagesListView(ListView):
     model= Pages
     template_name="Pages/pages_list.htmml"
 
-class PagesCreateView(CreateView):
-    template_name= 'Pages/createpage.html'
-    form_class= PagesForm
-    queryset= Pages.objects.all()
-    sucess_url='/'
-
-    def form_valid(self, form):
-        print(form.cleaned_data)
-        return super().form_valid(form)
+def create(request):
+    if request.method == "POST":
+        form = CreateForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data.get("title")
+            subtitle = form.cleaned_data.get("subtitle")
+            content = form.cleaned_data.get("content")
+            author = form.cleaned_data.get("author")
+            image = form.cleaned_data.get("image")
+            post= Pages(title=title,subtitle=subtitle,content=content,author=author,image=image)
+            post.save()
+            return redirect("pages_list")
+    else:
+        form = CreateForm()
+    return render(request, "Pages/createpage.html", {"form": form})
         
 
 

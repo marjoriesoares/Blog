@@ -3,13 +3,14 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView
 from django.utils import timezone
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 
 class Pages(models.Model):
     title=models.CharField(max_length=50)
     subtitle=models.CharField(max_length=150)
-    body=models.CharField(max_length=12000)
+    content = RichTextField()
     author=models.OneToOneField(User,on_delete=models.CASCADE)
-    date=models.DateField(default=timezone.now)
+    date=models.DateField(auto_now_add=True)
     image=models.ImageField(upload_to='pages_img',default='default.png',blank=True)
 
     def __str__(self):

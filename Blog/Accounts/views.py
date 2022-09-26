@@ -21,7 +21,7 @@ def login_form(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("profile")
+                return render(request, 'Accounts/profile.html')
             else:
                 return render(
                     request,"Accounts/login.html",{"login_form": login_form,"message": "Username or password incorrect"})

@@ -7,5 +7,5 @@ urlpatterns = [
     path('', home , name='home'),
     path('pageslist/', PagesListView.as_view(), name='pages_list'),
     path('about/', about , name='about'),
-    path('create/', PagesCreateView.as_view(), name='pages_create')
+    path('create/', create, name='create')
 ]

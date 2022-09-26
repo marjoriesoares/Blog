@@ -13,6 +13,4 @@ urlpatterns = [
     path('messages/', include('Messages.urls')),
     path('pages/', include('Pages.urls')),
 
-]
-
-urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

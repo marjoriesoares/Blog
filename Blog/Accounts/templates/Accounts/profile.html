@@ -21,7 +21,7 @@
     <p>Link: {{ profile.link }}</p>
     <p>Image: {{ profile.image }}</p>
 
-    <a href="{% url 'editprofile' profile.id %}">Edit Profile</a>
+    <a href="{% url 'editprofile' user_id %}">Edit Profile</a>
     <a href="{% url 'logout' %}">Sign out</a>
 
     <div style="margin: 5em" ;></div>

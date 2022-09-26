@@ -6,20 +6,11 @@
 <div style="margin: 5em";></div>
 {% endblock%}
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pages List</title>
-</head>
-<body>
-        This is pages list. 
         {% for page in object_list %}
-            {{ page.author }}
+            {{ page.image }}
+            <li>{{ page.author }}
             {{ page.title }}
-            {{ page.date }}
+            {{ page.date }}</li>
         {% endfor %}
         <div style="margin: 5em";></div>
 </body>
