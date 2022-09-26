@@ -1,21 +1,21 @@
-{% extends "Pages/maintemplate.html" %} {% load static %} 
-{% block title %}
+{% extends "Pages/maintemplate.html" %} {% load static %} {% block title %}
 <title>Edit Profile</title>
-{% endblock %}
-{% block header %}
-<div style="margin: 5em";></div>
-{% endblock%}
-{% block content %}
+{% endblock %} {% block header %}
+<div style="margin: 5em" ;></div>
+{% endblock%} {% block content %}
+<p>{{ user_form.errors }} {{ user_form.non_field_errors }}</p>
+<p>{{ form.errors }} {{ form.non_field_errors }}</p>
+<form
+  action="{% url 'editprofile' profile_id  %}"
+  method="POST"
+  enctype="multipart/form-data"
+>
+  {% csrf_token %}
+  <table>
+    {{ user_form.as_table }} {{ form.as_table }}
+  </table>
 
-<form action="{% url 'editprofile' id  %}" method="POST"> {% csrf_token %}
-
-    <table>
-    
-        {{ form.as_table }}
-    </table>
-    
-    <input type="submit", value="Save">
-    
-    </form>
+  <input type="submit" , value="Save" />
+</form>
 
 {% endblock%}

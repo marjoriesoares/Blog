@@ -1,39 +1,30 @@
-{% extends "Pages/maintemplate.html" %} {% load static %} 
-{% block title %}
+{% extends "Pages/maintemplate.html" %} {% load static %} {% block title %}
 <title>Profile</title>
-{% endblock %}
-{% block header %}
-<div style="margin: 5em";></div>
-{% endblock%}
-{% block content %}
+{% endblock %} {% block header %}
+<div style="margin: 5em" ;></div>
+{% endblock%} {% block content %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile</title>
-</head>
-<body>
+  </head>
+  <body>
+    <h1>This is the profile page for {{ user.username }}</h1>
 
-    <h1>This is the profile page for {{ user.username }} </h1>
- 
+    <p>{{ user.first_name }} {{ user.last_name }}</p>
+    <p>{{ user.email }}</p>
 
-    <p>{{ user.username }}</p>
+    <p>Description: {{ profile.description }}</p>
+    <p>Link: {{ profile.link }}</p>
+    <p>Image: {{ profile.image }}</p>
 
-    {% for field in profile %}
+    <a href="{% url 'editprofile' profile.id %}">Edit Profile</a>
+    <a href="{% url 'logout' %}">Sign out</a>
 
-    <p>{{ field.description }}</p>
-    <p>{{ field.link }}</p>
-    <p>{{ field.image }}</p>
-
-    {% endfor %}
-
-
-
-    <button type="submit"> <a href="{% url 'logout' %}">Sign out</a></button>
-
-    <div style="margin: 5em";></div>
-</body>
-{% endblock%}
+    <div style="margin: 5em" ;></div>
+  </body>
+  {% endblock%}
 </html>

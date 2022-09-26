@@ -6,32 +6,44 @@ from .models import *
 
 
 class UserRegisterForm(UserCreationForm):
-    first_name=forms.CharField(label='First Name', max_length=100, required=True)
-    last_name=forms.CharField(label='Last Name', max_length=100, required=True)
-    username=forms.CharField(label='Username',max_length=100, required=True)
-    email=forms.EmailField(label='Email',required=True)
+    first_name = forms.CharField(label="First Name", max_length=100, required=True)
+    last_name = forms.CharField(label="Last Name", max_length=100, required=True)
+    username = forms.CharField(label="Username", max_length=100, required=True)
+    email = forms.EmailField(label="Email", required=True)
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'email']
+        fields = ["first_name", "last_name", "username", "email"]
 
-class UserEditForm(UserCreationForm):
-    email=forms.EmailField(label='Edit email')
-    first_name=forms.CharField(label='Edit Name')
-    last_name=forms.CharField(label='Edit Surname')
-    description=models.CharField(max_length=500)
-    link=models.CharField(max_length=200)
-    image=models.ImageField(default='default.png',upload_to='avatar')
 
+class UserEditForm(forms.ModelForm):
+    email = forms.EmailField(label="Edit email")
+    first_name = forms.CharField(label="Edit Name")
+    last_name = forms.CharField(label="Edit Surname")
+   
+    prefix = "user"
+
+    class Meta:
+        model = User
+        fields = ["first_name", "last_name", "email"]
+        help_texts = {k: "" for k in fields}
+
+
+class ProfileEditForm(forms.ModelForm):
+    description = forms.CharField(max_length=500)
+    link = forms.CharField(max_length=200)
+    image = forms.ImageField(required=False)
+
+    prefix = "profile"
 
     class Meta:
         model = Profile
-        fields = ['first_name', 'last_name','email', 'description','link','image']
-        help_texts = {k:"" for k in fields}
+        fields = ["description", "link", "image"]
+
 
 class ProfileForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
         model = Profile
-        fields = ['user', 'description', 'link', 'image']
+        fields = ["user", "description", "link", "image"]
