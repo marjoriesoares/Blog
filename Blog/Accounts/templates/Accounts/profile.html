@@ -13,15 +13,19 @@
   </head>
   <body>
     <h1>This is the profile page for {{ user.username }}</h1>
+    {% if profile.image %}
+
+    <p>{{ profile.image }}</p>
+
+    {% endif %}
 
     <p>{{ user.first_name }} {{ user.last_name }}</p>
     <p>{{ user.email }}</p>
 
     <p>Description: {{ profile.description }}</p>
     <p>Link: {{ profile.link }}</p>
-    <p>Image: {{ profile.image }}</p>
-
-    <a href="{% url 'editprofile' user_id %}">Edit Profile</a>
+ 
+    <a href="{% url 'editprofile' profile.id %}">Edit Profile</a>
     <a href="{% url 'logout' %}">Sign out</a>
 
     <div style="margin: 5em" ;></div>

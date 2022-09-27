@@ -34,7 +34,22 @@ def create(request):
     else:
         form = CreateForm()
     return render(request, "Pages/createpage.html", {"form": form})
-        
 
-
-
+def editpage(request, page_id):
+    edit_page = Pages.objects.get(id=page_id)
+    if request.method == "POST":
+        form = PageEditForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            edit_page.title = data["title"]
+            edit_page.subtitle=data["subtitle"]
+            edit_page.content =data["content"]
+            edit_page.image =data["image"]
+            edit_page.save()
+            return redirect('home')
+        else:
+            form = PageEditForm()
+            return render(request,"Pages/editpage.html",{"page_id": page_id, "form": form})
+    else:
+        form = PageEditForm()
+        return render(request,"Pages/editpage.html",{"page_id": page_id, "form": form})

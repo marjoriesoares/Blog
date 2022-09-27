@@ -16,7 +16,7 @@ class UserRegisterForm(UserCreationForm):
         fields = ["first_name", "last_name", "username", "email"]
 
 
-class UserEditForm(forms.ModelForm):
+class UserForm(forms.ModelForm):
     email = forms.EmailField(label="Edit email")
     first_name = forms.CharField(label="Edit Name")
     last_name = forms.CharField(label="Edit Surname")
@@ -29,7 +29,7 @@ class UserEditForm(forms.ModelForm):
         help_texts = {k: "" for k in fields}
 
 
-class ProfileEditForm(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
     description = forms.CharField(max_length=500)
     link = forms.CharField(max_length=200)
     image = forms.ImageField(required=False)
@@ -39,11 +39,3 @@ class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ["description", "link", "image"]
-
-
-class ProfileForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
-
-    class Meta:
-        model = Profile
-        fields = ["user", "description", "link", "image"]

@@ -8,3 +8,8 @@ class CreateForm(forms.ModelForm):
     class Meta:
         model = Pages
         fields = ['title', 'subtitle', 'content', 'author','image']
+
+class PageEditForm(forms.ModelForm):
+    class Meta:
+        model = Pages
+        fields = ['title', 'subtitle', 'content','image']

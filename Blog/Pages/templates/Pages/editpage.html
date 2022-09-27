@@ -1,0 +1,21 @@
+{% extends "Pages/maintemplate.html" %} {% load static %} 
+{% block title %}
+<title>Home</title>
+{% endblock %}
+{% block content %}
+<p>{{ form.errors }} {{ form.non_field_errors }}</p>
+<form
+  action="{% url 'editpage' page_id %}"
+  method="POST"
+  enctype="multipart/form-data"
+>
+  {% csrf_token %}
+  <table>
+    {{ form.media }}
+    {{ form.as_table }}
+  </table>
+
+  <input type="submit" , value="Save" />
+</form>
+
+{% endblock%}

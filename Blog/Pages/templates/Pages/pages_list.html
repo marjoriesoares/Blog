@@ -7,12 +7,13 @@
 {% endblock%}
 {% block content %}
         {% for page in object_list %}
-            {{ page.image }}
+        <div class="post block">
+            {{ profile.get_image }}
             <li>{{ page.author }}
             {{ page.title }}
             {{ page.date }}</li>
         {% endfor %}
         <div style="margin: 5em";></div>
-</body>
+         </div>
 {% endblock %}
 </html>

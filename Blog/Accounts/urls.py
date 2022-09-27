@@ -10,6 +10,7 @@ urlpatterns = [
     path("login/", login_form, name="login"),
     path("logout/",LogoutView.as_view(template_name="Accounts/logout.html"),name="logout"),
     path("profile/<user_id>", profile, name="profile"),
+    path("createprofile/<user_id>", createprofile, name="createprofile"),
     path("editprofile/<profile_id>", editprofile, name="editprofile"),
     path("pages/", include("Pages.urls")),
 ]

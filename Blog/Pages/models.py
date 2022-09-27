@@ -13,5 +13,15 @@ class Pages(models.Model):
     date=models.DateField(auto_now_add=True)
     image=models.ImageField(upload_to='pages_img',default='default.png',blank=True)
 
+    class Meta:
+        ordering=['-date']
+    
+    @property
+    def get_image(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        else:
+            return "/media/pages_img/default.png"
+
     def __str__(self):
         return f"Author: {self.author} - Title: {self.title} - Date: {self.date}"
