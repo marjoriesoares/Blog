@@ -4,9 +4,9 @@ from .views import *
 
 
 urlpatterns = [
-    path('', home , name='home'),
-    path('pageslist/', PagesListView.as_view(), name='pages_list'),
+    path('', PagesListView.as_view(), name='home'),
     path('about/', about , name='about'),
     path('create/', create, name='create'),
-    path('edit/<page_id>', editpage, name='editpage')
+    path('edit/<page_id>', editpage, name='editpage'),
+    path('<slug:slug>/', PageDetail.as_view(), name='page_detail')
 ]

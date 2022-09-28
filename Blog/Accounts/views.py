@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.views.generic import DetailView
+from django.views.generic import DetailView, DeleteView
 from django.views import View
 from .models import Profile
 
@@ -76,13 +76,12 @@ def createprofile(request, user_id):
         form = ProfileForm()
         return render(request,"Accounts/createprofile.html",{"user_id": user_id, "form": form, "user_form": user_form})
 
-
-
-
 @login_required
 def profile(request, user_id):
     profile = Profile.objects.get(user__id=user_id)
-    return render(request, "Accounts/profile.html", {"profile": profile, "user": profile.user})
+    return render(
+        request, "Accounts/profile.html", {"profile": profile, "user": profile.user}
+    )
 
 
 @login_required
@@ -105,12 +104,33 @@ def editprofile(request, profile_id):
             edit_profile.image = data["image"]
             edit_profile.save()
         else:
-            return render(request,"Accounts/editprofile.html",{"profile_id": profile_id, "form": form, "user_form": user_form})
+            return render(
+                request,
+                "Accounts/editprofile.html",
+                {"profile_id": profile_id, "form": form, "user_form": user_form},
+            )
 
         return redirect(f"/accounts/profile/{edit_profile.user.id}")
     else:
         user_form = UserForm(
-            initial={"email": edit_profile.user.email,"first_name": edit_profile.user.first_name,"last_name": edit_profile.user.last_name})
+            initial={
+                "email": edit_profile.user.email,
+                "first_name": edit_profile.user.first_name,
+                "last_name": edit_profile.user.last_name,
+            }
+        )
         form = ProfileForm(
-            initial={"description": edit_profile.description,"link": edit_profile.link,"image": edit_profile.image})
-        return render(request,"Accounts/editprofile.html",{"profile_id": profile_id, "form": form, "user_form": user_form})
+            initial={
+                "description": edit_profile.description,
+                "link": edit_profile.link,
+                "image": edit_profile.image,
+            }
+        )
+        return render(
+            request,
+            "Accounts/editprofile.html",
+            {"profile_id": profile_id, "form": form, "user_form": user_form},
+        )
+class AccountDelete(DeleteView):
+    model = Profile
+    success_url = reverse_lazy('home')

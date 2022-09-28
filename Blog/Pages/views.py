@@ -10,12 +10,13 @@ from Accounts.views import *
 
 
 def home(request):
-    return render(request, 'Pages/home.html')
+    return render(request, 'Pages/pages_list.html')
 
 def about(request):
     return render(request, 'Pages/about.html')
 
 class PagesListView(ListView):
+    queryset = Pages.objects.filter(status=1).order_by('date')
     model= Pages
     template_name="Pages/pages_list.htmml"
 
@@ -51,5 +52,16 @@ def editpage(request, page_id):
             form = PageEditForm()
             return render(request,"Pages/editpage.html",{"page_id": page_id, "form": form})
     else:
-        form = PageEditForm()
+        form = PageEditForm(
+            initial={
+                "title": edit_page.title,
+                "subtitle": edit_page.subtitle,
+                "content": edit_page.content,
+                "image": edit_page.image,
+            }
+        )
         return render(request,"Pages/editpage.html",{"page_id": page_id, "form": form})
+
+class PageDetail(DetailView):
+    model = Pages
+    template_name = 'page_detail.html'

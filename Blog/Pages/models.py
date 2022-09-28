@@ -5,12 +5,19 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 
+STATUS = (
+    (0,"Draft"),
+    (1,"Publish")
+)
+
 class Pages(models.Model):
     title=models.CharField(max_length=50)
+    slug = models.SlugField(default="",max_length=200, unique=True)
     subtitle=models.CharField(max_length=150)
     content = RichTextField()
-    author=models.OneToOneField(User,on_delete=models.CASCADE)
+    author=models.ForeignKey(User,on_delete=models.CASCADE)
     date=models.DateField(auto_now_add=True)
+    status = models.IntegerField(choices=STATUS, default=0)
     image=models.ImageField(upload_to='pages_img',default='default.png',blank=True)
 
     class Meta:

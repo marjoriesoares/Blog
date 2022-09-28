@@ -3,32 +3,48 @@
 {% endblock %} {% block header %}
 <div style="margin: 5em" ;></div>
 {% endblock%} {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profile</title>
-  </head>
-  <body>
-    <h1>This is the profile page for {{ user.username }}</h1>
-    {% if profile.image %}
+<style>
+  .center {
+      border: 5px solid #fdfdfd;
+      display: flex;
+      justify-content: center;
+      }
+  body {
+      font-family: "Roboto", sans-serif;
+      font-size: 18px;
+      background-color: #fdfdfd;
+      text-align: center;
+      }
 
-    <p>{{ profile.image }}</p>
+  .head_text {
+      color: white;
 
-    {% endif %}
+  }
 
-    <p>{{ user.first_name }} {{ user.last_name }}</p>
-    <p>{{ user.email }}</p>
+  .card {
+      box-shadow: 0 16px 48px #E3E7EB;
+  }
 
-    <p>Description: {{ profile.description }}</p>
-    <p>Link: {{ profile.link }}</p>
- 
-    <a href="{% url 'editprofile' profile.id %}">Edit Profile</a>
-    <a href="{% url 'logout' %}">Sign out</a>
+</style>
+<div class="container">
+  <div class="row">
+      <div class="center">
+        <div class="card mb-4">
+          <div class="card-body">
+        <h1> {{ user.username }}</h1>
 
-    <div style="margin: 5em" ;></div>
-  </body>
-  {% endblock%}
-</html>
+          <p class="card-img-top"> <img src="{{ profile.image.url }}" alt=""></p>
+
+          <p>{{ user.first_name }} {{ user.last_name }}</p>
+          <p>{{ user.email }}</p>
+          <p>Description: {{ profile.description }}</p>
+          <p>Link: {{ profile.link }}</p>
+          <a href="{% url 'editprofile' profile.id %}" class="btn btn-primary">Edit Profile</a>
+          <a href="{% url 'logout' %}" class="btn btn-primary">Sign out</a>
+          <a href="{% url 'deleteprofile' profile.id %}" class="btn btn-primary">Delete Account</a>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+{% endblock%}

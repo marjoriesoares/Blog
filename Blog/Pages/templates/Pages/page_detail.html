@@ -1,0 +1,24 @@
+{% extends "Pages/maintemplate.html" %} {% load static %} 
+{% block title %}
+<title>Page</title>
+{% endblock %}
+{% block header %}
+<div style="margin: 5em";></div>
+{% endblock%}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-8 card mb-4  mt-3 left  top">
+        <div class="card-body">
+          <p class=" text-muted">{{ page.author }} | {{ page.date }}</p>
+          <p class="card-text ">{{ page.content }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

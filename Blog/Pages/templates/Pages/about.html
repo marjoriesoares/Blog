@@ -3,11 +3,17 @@
 <title>About</title>
 {% endblock %}
 {% block header %}
-<div style="margin: 5em";></div>
 {% endblock%}
 {% block content %}
 
-    This is about me
-    <div style="margin: 5em";></div>
+<div> 
+    <img src="{% static 'Pages/assets/about.png' %}" alt="about.png"/>
+        <style>
+        img {
+        width: 100%;
+        height: 100%;
+        }
+        </style>
+</div>
 
 {% endblock %}

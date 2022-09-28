@@ -11,8 +11,3 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username + " " + self.user.email
-
-def create_profile(sender, **kwargs):
-    if kwargs['created']:
-        user_profile = Profile.objects.create(user=kwargs['instance'])
-

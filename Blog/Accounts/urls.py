@@ -13,4 +13,5 @@ urlpatterns = [
     path("createprofile/<user_id>", createprofile, name="createprofile"),
     path("editprofile/<profile_id>", editprofile, name="editprofile"),
     path("pages/", include("Pages.urls")),
+    path("deleteprofile/<pk>", AccountDelete.as_view(template_name="Accounts/deleteprofile.html"), name="deleteprofile"),
 ]
