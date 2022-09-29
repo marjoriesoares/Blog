@@ -6,19 +6,18 @@
 <div style="margin: 5em";></div>
 {% endblock%}
 {% block content %}
+{% for p in page %}
 
 <div class="container">
     <div class="row">
       <div class="col-md-8 card mb-4  mt-3 left  top">
         <div class="card-body">
-          <p class=" text-muted">{{ page.author }} | {{ page.date }}</p>
-          <p class="card-text ">{{ page.content }}</p>
+          <p class="center"> <img src="{{ p.image.url }}" alt=""></p>
+          <p class=" text-muted">{{ p.author }} | {{ p.date }}</p>
+          <p class="card-text ">{{ p.content }}</p>
         </div>
       </div>
     </div>
   </div>
-            {% endfor %}
-        </div>
-    </div>
-</div>
+  {% endfor %}
 {% endblock %}

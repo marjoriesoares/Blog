@@ -88,7 +88,7 @@ def profile(request, user_id):
 def editprofile(request, profile_id):
     edit_profile = Profile.objects.get(id=profile_id)
     if request.method == "POST":
-        form = ProfileForm(request.POST, prefix="profile")
+        form = ProfileForm(request.POST, request.FILES, prefix="profile")
         user_form = UserForm(request.POST, prefix="user")
         if form.is_valid() and user_form.is_valid():
             data = form.cleaned_data
@@ -131,6 +131,7 @@ def editprofile(request, profile_id):
             "Accounts/editprofile.html",
             {"profile_id": profile_id, "form": form, "user_form": user_form},
         )
-class AccountDelete(DeleteView):
-    model = Profile
-    success_url = reverse_lazy('home')
+def delete_account(resquest, user_id):
+    delete_account=User.objects.filter(id=user_id)
+    delete_account.delete()
+    return redirect('/')

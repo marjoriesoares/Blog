@@ -25,6 +25,10 @@
       box-shadow: 0 16px 48px #E3E7EB;
   }
 
+  .avatar-img {
+    width: 200px;
+    height: 200px;
+  }
 </style>
 <div class="container">
   <div class="row">
@@ -33,7 +37,7 @@
           <div class="card-body">
         <h1> {{ user.username }}</h1>
 
-          <p class="card-img-top"> <img src="{{ profile.image.url }}" alt=""></p>
+          <p class="card-img-top"> <img class="avatar-img" src="{{ profile.image.url }}" alt=""></p>
 
           <p>{{ user.first_name }} {{ user.last_name }}</p>
           <p>{{ user.email }}</p>
@@ -41,7 +45,7 @@
           <p>Link: {{ profile.link }}</p>
           <a href="{% url 'editprofile' profile.id %}" class="btn btn-primary">Edit Profile</a>
           <a href="{% url 'logout' %}" class="btn btn-primary">Sign out</a>
-          <a href="{% url 'deleteprofile' profile.id %}" class="btn btn-primary">Delete Account</a>
+          <a href="{% url 'deleteaccount' user.id %}" class="btn btn-primary">Delete Account</a>
           </div>
         </div>
     </div>

@@ -31,7 +31,7 @@ def create(request):
             image = form.cleaned_data.get("image")
             post= Pages(title=title,subtitle=subtitle,content=content,author=author,image=image)
             post.save()
-            return redirect("pages_list")
+            return redirect("home")
     else:
         form = CreateForm()
     return render(request, "Pages/createpage.html", {"form": form})
@@ -62,6 +62,7 @@ def editpage(request, page_id):
         )
         return render(request,"Pages/editpage.html",{"page_id": page_id, "form": form})
 
-class PageDetail(DetailView):
-    model = Pages
-    template_name = 'page_detail.html'
+def page_detail(request, slug):
+    page = Pages.objects.filter(slug=slug)
+
+    return render(request, "Pages/page_detail.html", {"page": page})

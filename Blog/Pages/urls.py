@@ -8,5 +8,5 @@ urlpatterns = [
     path('about/', about , name='about'),
     path('create/', create, name='create'),
     path('edit/<page_id>', editpage, name='editpage'),
-    path('<slug:slug>/', PageDetail.as_view(), name='page_detail')
+    path('<slug:slug>/', page_detail , name='page_detail')
 ]
