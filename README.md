@@ -9,10 +9,10 @@ To install Django type in the terminal:
 
 The directories we will need are configured in settings.py to work without issues on your computer, since only relative paths were used.
 Blog has:
-<li>•	A main page with brief information about the posts and URLs redirecting the user to the posts.</li>
-•	An about session with introduction to the author.
-•	A profile session.
-•	A message session.
+<li>A main page with brief information about the posts and URLs redirecting the user to the posts.
+An about session with introduction to the author.
+A profile session.
+A message session.</li>
 
 The profile is automatic created and can be edit or deleted.
 
