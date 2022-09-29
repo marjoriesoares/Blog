@@ -22,7 +22,7 @@ class PagesListView(ListView):
 
 def create(request):
     if request.method == "POST":
-        form = CreateForm(request.POST)
+        form = CreateForm(request.POST, request.FILES)
         if form.is_valid():
             title = form.cleaned_data.get("title")
             subtitle = form.cleaned_data.get("subtitle")
