@@ -36,10 +36,10 @@ def create(request):
         form = CreateForm()
     return render(request, "Pages/createpage.html", {"form": form})
 
-def editpage(request, page_id):
-    edit_page = Pages.objects.get(id=page_id)
+def editpage(request, slug):
+    edit_page = Pages.objects.get(slug=slug)
     if request.method == "POST":
-        form = PageEditForm(request.POST)
+        form = PageEditForm(request.POST, request.FILES)
         if form.is_valid():
             data = form.cleaned_data
             edit_page.title = data["title"]
@@ -50,7 +50,7 @@ def editpage(request, page_id):
             return redirect('home')
         else:
             form = PageEditForm()
-            return render(request,"Pages/editpage.html",{"page_id": page_id, "form": form})
+            return render(request,"Pages/editpage.html",{"slug": slug, "form": form})
     else:
         form = PageEditForm(
             initial={
@@ -60,9 +60,14 @@ def editpage(request, page_id):
                 "image": edit_page.image,
             }
         )
-        return render(request,"Pages/editpage.html",{"page_id": page_id, "form": form})
+        return render(request,"Pages/editpage.html",{"slug": slug, "form": form})
 
 def page_detail(request, slug):
     page = Pages.objects.filter(slug=slug)
 
     return render(request, "Pages/page_detail.html", {"page": page})
+
+def deletepage(request, slug):
+    page=Pages.objects.filter(slug=slug)
+    page.delete()
+    return redirect("home")

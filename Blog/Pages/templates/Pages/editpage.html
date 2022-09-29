@@ -5,7 +5,7 @@
 {% block content %}
 <p>{{ form.errors }} {{ form.non_field_errors }}</p>
 <form
-  action="{% url 'editpage' page_id %}"
+  action="{% url 'editpage' slug %}"
   method="POST"
   enctype="multipart/form-data"
 >
