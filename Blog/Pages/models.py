@@ -4,6 +4,7 @@ from django.views.generic import DetailView
 from django.utils import timezone
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
+from django.utils.safestring import mark_safe
 
 STATUS = (
     (0,"Draft"),
@@ -15,6 +16,8 @@ class Pages(models.Model):
     slug = models.SlugField(default="",max_length=200, unique=True)
     subtitle=models.CharField(max_length=150)
     content = RichTextField()
+    def html_content(self):
+        return mark_safe(self.content)
     author=models.ForeignKey(User,on_delete=models.CASCADE)
     date=models.DateField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
