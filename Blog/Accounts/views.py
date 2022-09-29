@@ -89,7 +89,7 @@ def editprofile(request, profile_id):
     edit_profile = Profile.objects.get(id=profile_id)
     if request.method == "POST":
         form = ProfileForm(request.POST, request.FILES, prefix="profile")
-        user_form = UserForm(request.POST, prefix="user")
+        user_form = UserForm(request.POST, request.FILES, prefix="user")
         if form.is_valid() and user_form.is_valid():
             data = form.cleaned_data
             user_data = user_form.cleaned_data
@@ -132,6 +132,6 @@ def editprofile(request, profile_id):
             {"profile_id": profile_id, "form": form, "user_form": user_form},
         )
 def delete_account(resquest, user_id):
-    delete_account=User.objects.filter(id=user_id)
+    delete_account = User.objects.filter(id=user_id)
     delete_account.delete()
     return redirect('/')
