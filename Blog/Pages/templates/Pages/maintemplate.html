@@ -46,6 +46,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'about' %}">About</a>
             </li>
+            {% if request.user.is_authenticated %}
             <li class="nav-item">
               <a
                 class="nav-link active"
@@ -54,7 +55,6 @@
                 >Messages</a
               >
             </li>
-            {% if request.user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'profile' user_id=user.id %}"
                 >{{ user.username }}</a
