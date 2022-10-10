@@ -22,7 +22,7 @@ class MessageListView(LoginRequiredMixin, ListView):
 
         for i in range(len(messages)):
             if messages[i].sender != user:
-                other_users.append(messages[i.sender])
+                other_users.append(messages[i].sender)
             else:
                 other_users.append(messages[i].receiver)
 
@@ -67,15 +67,15 @@ class InboxView(LoginRequiredMixin, DetailView):
         context['other_users'] = other_users
 
         return context
-
-def post(request):
-    sender = User.objects.get(pk=request.POST.get('you')) 
-    receiver = User.objects.get(pk=request.POST.get('receiver')) 
-    message = request.POST.get('message')
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            if message:
-                Message.objects.create(sender=sender, receiver=receiver, message=message)
-            return redirect('inbox', username=receiver.username)
-    else:
-        return render(request, 'Messages/messages_list.html')
+        
+    def post(request):
+        sender = User.objects.get(pk=request.POST.get('you')) 
+        receiver = User.objects.get(pk=request.POST.get('receiver')) 
+        message = request.POST.get('message')
+        if request.user.is_authenticated:
+            if request.method == 'POST':
+                if message:
+                    Message.objects.create(sender=sender, receiver=receiver, message=message)
+                    return redirect('inbox', username=receiver.username)
+                else:
+                    return render(request, 'Messages/messages_list.html')

@@ -5,5 +5,4 @@ from .views import *
 urlpatterns = [
     path('', MessageListView.as_view(), name='messages_list'),
     path('inbox/<str:username>/', InboxView.as_view(), name='inbox'),
-    path('post', post , name='post'),
 ]
