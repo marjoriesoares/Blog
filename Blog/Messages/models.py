@@ -29,10 +29,12 @@ class Message(models.Model):
     def get_all_messages(id_1, id_2):
         messages = []
         # get messages between the two users, sort them by date(reverse) and add them to the list
-        message1 = Message.objects.filter(sender_id=id_1, receiver_id=id_2).order_by('-date') # get messages from sender to recipient
+        message1 = Message.objects.filter(sender_id=usr_1, receiver_id=usr_2).order_by('-date') 
+        # get messages from sender to recipient
         for x in range(len(message1)):
             messages.append(message1[x])
-        message2 = Message.objects.filter(sender_id=id_2, receiver_id=id_1).order_by('-date') # get messages from recipient to sender
+        message2 = Message.objects.filter(sender_id=usr_2, receiver_id=usr_1).order_by('-date') 
+        # get messages from recipient to sender
         for x in range(len(message2)):
             messages.append(message2[x])
 
