@@ -56,8 +56,8 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'profile' user_id=user.id %}"
-                >{{ user.username }}</a
+              <a class="nav-link" href="{% url 'profile' user_id=request.user.id %}"
+                >{{ request.user.username }}</a
               >
             </li>
             {% endif %}
@@ -94,9 +94,7 @@
   <!-- Side widgets-->
   <div class="col-lg-4">
     <!-- Search widget-->
-    <div>
-      
-    </div>
+    <div></div>
     <!-- Categories widget-->
     <div>
     </div>
