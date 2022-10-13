@@ -68,9 +68,9 @@ class InboxView(LoginRequiredMixin, DetailView):
 
         return context
         
-    def post(request):
+    def post(self, request, username):
         sender = User.objects.get(pk=request.POST.get('you')) 
-        receiver = User.objects.get(pk=request.POST.get('receiver')) 
+        receiver = User.objects.get(pk=request.POST.get('recipient')) 
         message = request.POST.get('message')
         if request.user.is_authenticated:
             if request.method == 'POST':
