@@ -49,8 +49,11 @@ The Blog also has 2 complete cicles of CRUD (Create, Read, Update and Delete), o
 - You can use the admin portal to create, edit or delete any of the instances.
 
 4. Messages
-- This part is still being worked on.
-![image](https://user-images.githubusercontent.com/108837573/193112735-574d6753-0f53-4761-b7df-a3953a85ade2.png)
+- The messages app presents the list of all messages sent to the logged user from different senders in http://127.0.0.1:8000/messages/.
+![image](https://user-images.githubusercontent.com/108837573/195689321-e7462475-9732-4e07-97ed-eb9218a7d3c4.png)
+- In http://127.0.0.1:8000/messages/inbox/<str:username>/ there is a conversation with an specific user.
+![image](https://user-images.githubusercontent.com/108837573/195689636-79ff4d0f-cdc8-4802-8712-24c05c0b39b7.png)
+
 
 5. You can find the test cases and video showing the Blog functionality here:
 https://drive.google.com/drive/folders/1LoqdnUcUxfRXERW48Hles702han5th12?usp=sharing
@@ -96,7 +99,8 @@ El Blog también cuenta con 2 ciclos completos de CRUD (Crear, Leer, Actualizar 
 
 4. Mensajes
 
-Esta parte todavía se está trabajando.
+- La aplicación de mensajes presenta la lista de todos los mensajes enviados al usuario registrado desde diferentes remitentes en http://127.0.0.1:8000/messages/.
+- En http://127.0.0.1:8000/messages/inbox/<str:username>/ hay una conversación con un usuario específico.
 
 5. Puede encontrar los casos de prueba y el video que muestra la funcionalidad del Blog aquí:
 https://drive.google.com/drive/folders/1LoqdnUcUxfRXERW48Hles702han5th12?usp=sharing
