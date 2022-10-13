@@ -42,12 +42,12 @@ class InboxView(LoginRequiredMixin, DetailView):
 
     def get_object(self):
         UserName= self.kwargs.get("username")
-        return get_object_or_404(User, username=UserName)
+        return get_object_or_404(User, username__iexact=UserName)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = User.objects.get(pk=self.request.user.pk)
-        other_user = User.objects.get(username=self.kwargs.get("username"))
+        other_user = User.objects.get(username__iexact=self.kwargs.get("username"))
         messages = Message.get_message_list(user)
 
         other_users = []
