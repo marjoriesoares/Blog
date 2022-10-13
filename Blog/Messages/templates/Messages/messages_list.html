@@ -38,37 +38,54 @@
   width: 180%;
   
 }
+.msg-header {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.row {
+  padding: 0 20%;
+}
+
+.card {
+  margin: 0 auto;
+}
 </style> 
 <p style="text-decoration-color: #212529"><h1>Messages</h1></p>
-{% for message in messages %}
-{% for us in other_users %}
 <div class="container">
+{% for message in messages %}
   <div class="row">
-        <div class="card mb-4">
-          <div class="card-body">
-              {% if us.pk == message.receiver.pk or us.pk == message.sender.pk  %}
-                <div id="HASH" class="flex flex-col flex-nowrap overflow-y-scroll overflow-x-hidden ml-4 my-1 mx-auto text-start space-x-1 truncate">
-                  <span id="time-HASH" class=" text-black text-lg text-left font-semibold font-sans">To:
-                  {{ us }}</span>
-                  <span class="text-black text-lg text-left font-semibold font-sans"><small class=" justify-self-end text-gray-600 mr-4 mt-3 text-base  ">
-                    <time datetime="2020-01-01">
-                        Date: {{ message.date|date:"m/d/Y" }}
-                    </time></span>
-                </small>
-                </div>
-              </p>
-                  <p class="text-center font-medium text-slate-500 truncate">
-                  {{ message.message }}
-                  </p>
-              </div>
-          </div>
+    {% for us in other_users %}
+      {% if us == message.receiver or us == message.sender  %}
+    <div class="card mb-4">
+    <div class="card-body">
+      <p class="msg-header">
+          {% if us == message.receiver %}
+            To: 
+          {% elif us == message.sender %}
+            From: 
           {% endif %}
-          {% endfor %}
-          {% endfor %}
-          </div>
-        </div>
+          {{ us }}
+        <span class="text-black text-lg text-left font-semibold font-sans">
+          <small class=" justify-self-end text-gray-600 mr-4 mt-3 text-base  ">
+            <time datetime="2020-01-01">
+                Date: {{ message.date|date:"m/d/Y" }}
+            </time>
+          </small>
+        </span>
+      </p>
+      
+      <p class="msg-content text-center font-medium text-slate-500 truncate">
+      {{ message.message }}
+      </p>
+      <a href="{% url 'inbox' us.username %}" class="btn btn-primary">Inbox</a>
+    </div>
+    </div>
+      {% endif %}
+{% endfor %}
   </div>
+{% endfor %}
 </div>
-<a href="{% url 'inbox' user.username %}" class="btn btn-primary">Inbox</a>
 <div style="margin: 14em";></div>
 {% endblock %}
