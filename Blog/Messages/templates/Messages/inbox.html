@@ -15,7 +15,7 @@
             <div class=" flex flex-col justify-self-start bg-blue-500 w-1/2 mr-[50%] ml-4 rounded-md px-3 py-2
             text-start">
                 <p class=" font-medium">
-                    {{ message.message }}
+                    <b>{{ message.message }}</b>
                 </p>
                 <small class="text-slate-700 text-right">
                     <time datetime="2020-01-01">
@@ -27,7 +27,7 @@
             <div class="flex flex-col justify-self-end bg-white
                             w-1/2 ml-[49%] mr-4 rounded-md px-3 py-2 text-start ">
                 <p class=" font-medium">
-                    {{ message.message }}
+                   <b>{{ message.message }}</b> 
                 </p>
 
                 <small class="text-slate-700 text-right">
@@ -66,9 +66,11 @@
                     m-0
                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 placeholder="Type a message...">
-            <button aria-hidden="true" type="submit">
+                <div style="margin: 2em";></div>
+            <button class="btn btn-primary" aria-hidden="true" type="submit">Send</button>
+            <div style="margin: 3em";></div>
                 <i class="fa fa-paper-plane text-[20px]"></i>
-            </button>
+            
         </footer>
     </form>
 
@@ -109,6 +111,7 @@
                     m-0
                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 placeholder="Type a message...">
+                <div style="margin: 5em";></div>
             <imput type="submit">
                 <i class="fa fa-paper-plane text-[20px]"></i>
             </button>

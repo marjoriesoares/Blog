@@ -8,10 +8,11 @@ from Accounts.models import *
 from .models import *
 from .forms import *
 
+
 class MessageListView(LoginRequiredMixin, ListView):
-    queryset = Message.objects.all().order_by('date')
-    model= Message
-    template_name="Messages/messages_list.html"
+    queryset = Message.objects.all().order_by("date")
+    model = Message
+    template_name = "Messages/messages_list.html"
 
     def get_context_data(self, **Kwargs):
         context = super().get_context_data(**Kwargs)
@@ -26,22 +27,23 @@ class MessageListView(LoginRequiredMixin, ListView):
             else:
                 other_users.append(messages[i].receiver)
 
-        context['messages'] = messages
-        context['other_users'] = other_users
-        context['you'] = user
+        context["messages"] = messages
+        context["other_users"] = other_users
+        context["you"] = user
         return context
+
 
 class InboxView(LoginRequiredMixin, DetailView):
     model = Message
-    template_name = 'Messages/inbox.html'
-    login_url = '/login/'
+    template_name = "Messages/inbox.html"
+    login_url = "/login/"
     queryset = User.objects.all()
 
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(self.request, *args, **kwargs)
 
     def get_object(self):
-        UserName= self.kwargs.get("username")
+        UserName = self.kwargs.get("username")
         return get_object_or_404(User, username__iexact=UserName)
 
     def get_context_data(self, **kwargs):
@@ -60,22 +62,24 @@ class InboxView(LoginRequiredMixin, DetailView):
         sender = other_user
         receiver = user
 
-        context['messages'] = Message.get_all_messages(sender, receiver)
-        context['messages_list'] = messages
-        context['other_person'] = other_user
-        context['you'] = user
-        context['other_users'] = other_users
+        context["messages"] = Message.get_all_messages(sender, receiver)
+        context["messages_list"] = messages
+        context["other_person"] = other_user
+        context["you"] = user
+        context["other_users"] = other_users
 
         return context
-        
+
     def post(self, request, username):
-        sender = User.objects.get(pk=request.POST.get('you')) 
-        receiver = User.objects.get(pk=request.POST.get('recipient')) 
-        message = request.POST.get('message')
+        sender = User.objects.get(pk=request.POST.get("you"))
+        receiver = User.objects.get(pk=request.POST.get("recipient"))
+        message = request.POST.get("message")
         if request.user.is_authenticated:
-            if request.method == 'POST':
+            if request.method == "POST":
                 if message:
-                    Message.objects.create(sender=sender, receiver=receiver, message=message)
-                    return redirect('inbox', username=receiver.username)
+                    Message.objects.create(
+                        sender=sender, receiver=receiver, message=message
+                    )
+                    return redirect("inbox", username=receiver.username)
                 else:
-                    return render(request, 'Messages/messages_list.html')
+                    return render(request, "Messages/messages_list.html")

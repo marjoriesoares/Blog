@@ -14,27 +14,33 @@ from PIL import Image
 
 User = get_user_model()
 
+
 class Message(models.Model):
-    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender')
-    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receiver')
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sender")
+    receiver = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="receiver"
+    )
     message = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
     is_read = models.BooleanField(default=False, null=True)
 
-
     def __str__(self):
         return self.message
 
+    def get_all_messages(usr_1, usr_2):
+        # usr_1 and usr_2 can be either an id (pk) or an username, both will work
 
-    def get_all_messages(id_1, id_2):
         messages = []
         # get messages between the two users, sort them by date(reverse) and add them to the list
-        message1 = Message.objects.filter(sender_id=usr_1, receiver_id=usr_2).order_by('-date') 
-        # get messages from sender to recipient
+        message1 = Message.objects.filter(sender=usr_1, receiver=usr_2).order_by(
+            "-date"
+        )  # get messages from sender to recipient
+
         for x in range(len(message1)):
             messages.append(message1[x])
-        message2 = Message.objects.filter(sender_id=usr_2, receiver_id=usr_1).order_by('-date') 
-        # get messages from recipient to sender
+        message2 = Message.objects.filter(sender=usr_2, receiver=usr_1).order_by(
+            "-date"
+        )  # get messages from recipient to sender
         for x in range(len(message2)):
             messages.append(message2[x])
 
